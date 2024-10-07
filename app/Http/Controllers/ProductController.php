@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
+use App\Models\Vendor;
+use App\Http\Requests\ProductStoreRequest;
 
 class ProductController extends Controller
 {
@@ -23,5 +25,23 @@ class ProductController extends Controller
         $product = Product::find($id);
         //変数をproducts/show.blade.phpに渡す
         return view('products.show',compact('product'));
+    }
+
+    public function create() {
+        $vendor_codes=Vendor::pluck('vendor_code');
+
+        return view('products.create', compact('vendor_codes'));
+    }
+
+    public function store(ProductStoreRequest $request){
+        //フォームの入力をもとにテーブルにデータを追加する
+        $product = new Product();
+        $product->product_name=$request->input('product_name');
+        $product->price=$request->input('price');
+        $product->vendor_code=$request->input('vendor_code');
+        $product->save();
+
+        //リダイレクトする
+        return redirect("/products/{$product->id}");
     }
 }
