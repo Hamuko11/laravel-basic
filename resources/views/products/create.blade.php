@@ -20,42 +20,41 @@
   </div>
   @endif
 
-  - <form action="{{ route('products.store') }}" method="POST">
-    + <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-      @csrf
-      <table>
-        <tr>
-          <th>商品名</th>
-          <td>
-            <input type="text" name="product_name">
-          </td>
-        </tr>
-        <tr>
-          <th>価格</th>
-          <td>
-            <input type="number" name="price">
-          </td>
-        </tr>
-        <tr>
-          <th>仕入先コード</th>
-          <td>
-            <select name="vendor_code">
-              <option selected value="">選択してください</option>
-              @foreach ($vendor_codes as $vendor_code)
-              <option value="{{ $vendor_code }}">{{ $vendor_code }}</option>
-              @endforeach
-            </select>
-          </td>
-        </tr>
-        + <tr>
-          + <th>画像</th>
-          + <td>
-            + <input type="file" name="image">
-            + </td>
-          + </tr>
-      </table>
-      <input type="submit" value="登録">
-    </form>
+  <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <table>
+      <tr>
+        <th>商品名</th>
+        <td>
+          <input type="text" name="product_name">
+        </td>
+      </tr>
+      <tr>
+        <th>価格</th>
+        <td>
+          <input type="number" name="price">
+        </td>
+      </tr>
+      <tr>
+        <th>仕入先コード</th>
+        <td>
+          <select name="vendor_code">
+            <option selected value="">選択してください</option>
+            @foreach ($vendor_codes as $vendor_code)
+            <option value="{{ $vendor_code }}">{{ $vendor_code }}</option>
+            @endforeach
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th>画像</th>
+        <td>
+          <input type="file" name="image">
+        </td>
+      </tr>
+    </table>
+    <input type="submit" value="登録">
+  </form>
 </body>
 
 </html>
